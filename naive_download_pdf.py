@@ -50,11 +50,16 @@ def download_paper_standalone(pdf_url_input):
 
     # 保存PDF文件
     if success_flag:
-        filename = pdf_url_input.split('/')[-1] 
-        if filename is not None:
-            filename = filename + '_downloaded.pdf'
-        else:
-            filename = pdf_url_input.split('/')[-2] 
+        filename = pdf_url_input.replace( "https://", "" )
+        filename = filename.replace( "/", "_" )
+        filename = filename.replace( " ", "_" )
+        
+        filename = filename + '_downloaded.pdf'
+        # filename = pdf_url_input.split('/')[-1] 
+        # if filename is not None:
+        #     filename = filename + '_downloaded.pdf'
+        # else:
+        #     filename = pdf_url_input.split('/')[-2] 
         with open(filename, 'wb') as f:
             f.write(response.content)
         
